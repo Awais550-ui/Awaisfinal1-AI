@@ -1,5 +1,3 @@
-
-
 ## TO Run the Game
 Download the Files and folders as it is and run chess.py to play the game.
 
@@ -12,8 +10,6 @@ Download the Files and folders as it is and run chess.py to play the game.
   * alphaBeta Function was created based on the pseudocode Provided by wikipedia: https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning
 
 
-  * Used 'Fruit' values for rating material and similar values for other ratings from chessprogramming wikispace : https://chessprogramming.wikispaces.com/Point%20Value
-
   * Generating Move lists for each piece class was inspired by chessprogramming wikispace on move lists: https://chessprogramming.wikispaces.com/Move%20List
 
   * Board representation 'boardArray' is based off the 8x8 board array method: https://chessprogramming.wikispaces.com/8x8%20Board
@@ -21,72 +17,46 @@ Download the Files and folders as it is and run chess.py to play the game.
   * Chess.com for descriptions of basic and special moves pieces can make:
   https://www.chess.com/learn-how-to-play-chess
 
-## Description: 
-Pychess is a pygame-based Player-Vs-AI chess engine that allows a player to play chess versus a computer that makes its own moves.
-The chess board and pieces in the game were created utilizing polymorphism and several class-based structures.
+Pychess: A Pygame-Based Chess Engine with AI
 
-The Alphabeta Pruning Search Algorithm is used by the Computer Ai to evaluate potential moves.
+Pychess is a chess game built using Pygame that allows players to play against an AI that autonomously makes its moves. The game utilizes a class-based structure and polymorphism for managing the chessboard and pieces.
 
+## Key Features:
 
+Board Class:
 
-### The following important milestones were reached throughout the development of this project:
+Contains all the necessary functions for the chessboard, including handling piece movements and detecting whether the player or AI is in check.
+Piece Classes:
 
+Each chess piece has its own class, derived from an abstract Piece class. These classes encapsulate piece-specific movement logic, ensuring accurate behavior on the board.
+Special Moves:
 
+Promotions: When a pawn reaches the opponent’s back rank, it can promote to a queen, rook, bishop, or knight.
+Castling: A player can perform castling, moving the king two squares and positioning the rook beside it.
+AI Using Alpha-Beta Pruning:
 
-* The creation of a board class that contains all of the pieces and functions needed to move across the board, determine if the player or the computer is in check, and so on.
+The AI evaluates possible moves using the Alpha-Beta Pruning Search Algorithm, an optimized version of the Minimax Algorithm.
+This algorithm helps the AI decide the best possible move by pruning branches in the decision tree that will not affect the final decision, improving efficiency and reducing search time.
+## Alpha-Beta Pruning Overview:
 
+Alpha-Beta Pruning optimizes decision-making by maintaining two values, alpha and beta, representing the best scores for the maximizing and minimizing players, respectively.
+The AI evaluates moves up to a maximum depth of 3 plies by default, though this can be adjusted to 4 plies for deeper analysis (which increases the computation time).
+When the algorithm detects that further exploration of a branch will not lead to a better outcome, it prunes that branch.
+## Game Components:
 
+Assets Folder: Contains sprite images for chess pieces used in the graphical interface.
+chess.py: Main program to run the game interface and start the game.
+board.py: Contains the Board class and the Alpha-Beta pruning logic.
+pieces.py: Contains the abstract Piece class, along with specific classes for each type of piece (e.g., pawn, rook, knight, etc.).
+ratings.py: Implements a Rating class used to evaluate the quality of moves based on multiple criteria.
+userInterface.py: Handles the graphical user interface with Pygame, allowing the player to make moves with the mouse and interact with the game.
+Evaluation and Performance:
 
-* The creation of unique piece classes with their own set of moves based on the piece. Each piece class derives from an abstract 'piece' class, which has its own set of variables and functions.
-  #### The following move sets are included in the game
- * Promotions: When a pawn moves to the opposite side of the board, it may exchange its current piece for a rook, a queen, a bishop, or a knight. 
+The main objective of the project is to ensure that the AI generates optimal moves quickly. During testing, the AI typically takes less than 1 second per move.
+The AI’s performance can be observed by checking the time it takes to make each move, which is printed after every AI move.
+Move Validation:
 
-* Castling: On a player's turn, he may move his king two squares to one side and then move the rook from that side's corner right next to the king on the opposite side.
+The project ensures that each piece adheres to its specific movement rules. The rules for each piece are described in detail in the project's documentation and can be manually tested by moving pieces on the board.
+Customizing Depth:
 
-* Creation of computer Ai that evaluates each individual move and decides which move to make based on the alpha beta pruning search algorithm
-
- #### Alpha Beta Pruning Summary: 
-TThe method maintains two numbers, alpha and beta, which reflect the minimum and maximum scores that the maximizing and minimizing players are guaranteed of, respectively. The initial values of alpha and beta are negative infinity and positive infinity, respectively, indicating that both players begin with their lowest possible score. When the minimizing player's (beta) maximum score falls below the maximizing player's (alpha) minimum score (i.e. beta = alpha), the maximizing player does not need to consider the descendants of this node because they will never be reached in actual play. (according to Wikipedia)
-
-IMPORTANT NOTE: At this time, the maximum depth is 3 plys. The algorithm is in favor of. The algorithm supports
-  running up to for plys however for the sake of running time and time it takes computers
-  to make move it is 1 lower. You can set self.MAXDEPTH = 4 in the board initalizer method,
-  if you want to see computer compute 'deeper' moves at the cost of how long method
-  takes to return move
-
-  Refer to link for more information on algorithm: https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-4-alpha-beta-pruning/
-
-* Creation of rating class that the computer uses to evaluate how ‘good’ a move is based on different factors.
-
-* Creating  a graphical user interface using pygame that draws the board and chess pieces and allows user to play the game and make moves with the mouse and prompts or certain tasks are displayed on the terminal while game is running.
-
-#### The contents in the file include:
-* assets folder: Contains all the chess piece sprites used for game’s graphics.
-* chess.py : Main program used to run interface and game. Run this program when starting the game
-* board.py: Contains board class and it’s methods. Also contains the alphabeta method that the computer uses to make moves
-* pieces.py: Contains the master class ‘Peices’ as well as all individual piece classes that inheret the main class.
-* ratings.py : Contains the ratings class with methods that evaluate the rating of a move.
-* userInterface.py: Contains the userInterface class that is used to play the game and display the game using pygame.
-
-## Evaluation Metrics
-
-* The main aim of the project is AI agent should generate optimal moves within less times. This has been shown during the code execution.
-  After every turn of AI a time has been displayed in seconds which indicates how much time AI has taken to make its moves.
-
-  It's mostly less than 1sec.
-
-* ##### Validating Moves
-
-    Another most important aspect of chess is each piece has it's own rule for moving along the board.
-    These rules are described in project presentation and evaluation can be made by manually trying to move each piece in the board
-
-* Default depth is set to 3, project can be evaluated by changing the deptth to different values and measure its performance.
-  Depth can be changed in board.py --> init constructor --> self.MAXDEPTH
-  
-  
-
-
-
-
- 
- 
+By default, the maximum search depth for the AI is set to 3 plies, but this can be adjusted in the board.py file. To change the search depth, simply modify the MAXDEPTH variable in the Board class constructor (e.g., self.MAXDEPTH = 4) for deeper moves at the cost of longer computation time.
