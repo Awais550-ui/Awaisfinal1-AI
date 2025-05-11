@@ -1,3 +1,4 @@
+#Final AI Project
 import pygame
 from pieces import *
 from ratings import Ratings

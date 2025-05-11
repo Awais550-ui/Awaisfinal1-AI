@@ -1,0 +1,1 @@
+The Images in the Assets folder are used for UI
